@@ -11,7 +11,6 @@ class Route
     public function getMethod()
     {
         $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : "GET";
-        // var_dump($method);die;
         return $method;
     }
 
@@ -19,7 +18,6 @@ class Route
     {
         if($this->getMethod() == "GET"){
             $this->arrURL[$url] = $action;
-            // var_dump($this->arrURL[$url] = $action);die;
         }
     }
 
@@ -38,25 +36,20 @@ class Route
         $explain = explode('@', $action);
         $controller = $explain[0];
         $function = $explain[1];
-        // var_dump($parse);die;
-
         $class = "\\App\\Controller\\" . $controller;
-
-        $object = new $class;
         // var_dump($class);die;
+        $object = new $class;
 
+        // var_dump($object);die;
         return $object->$function();
-
     }
 
     public function run()
     {
         $url = $this->getURL();
-
         foreach ($this->arrURL as $key => $value) {
             if($url == $key ) {
                 $this->parse($value);
-                // var_dump($this->parse($value));die;
                 break;
             }
         }

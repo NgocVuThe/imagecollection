@@ -21,7 +21,10 @@ class ComposerStaticInita2134e61dc00036ebf24211ac4947187
     );
 
     public static $classMap = array (
+        'App\\Controller\\EmployController' => __DIR__ . '/../..' . '/app/controllers/EmployController.php',
         'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/app/controllers/HomeController.php',
+        'App\\Model\\BaseModel' => __DIR__ . '/../..' . '/app/models/BaseModel.php',
+        'App\\Model\\Employer' => __DIR__ . '/../..' . '/app/models/Employer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
