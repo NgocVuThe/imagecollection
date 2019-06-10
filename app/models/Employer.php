@@ -1,14 +1,18 @@
 <?php
 namespace App\Model;
 
-use App\Model\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Employer extends BaseModel
+class Employer extends Model
 {
-
-    // id
-    // name
-    // address
-    // regist_num
     protected $table = 'employ';
+    protected $columns = [
+        'name',
+        'address',
+        'namecollection',
+        'regist_num',
+        'avatar',
+        'description'
+    ];
+    public $timestamps = false;
 }

@@ -5,12 +5,15 @@ class Route
     public function getURL()
     {
         $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
-        return $url;
+        $url = explode('?', $url);
+        // var_dump($url[0]);die;
+        return $url[0];
     }
 
     public function getMethod()
     {
         $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : "GET";
+        // var_dump($method);die;
         return $method;
     }
 
@@ -39,7 +42,7 @@ class Route
         $class = "\\App\\Controller\\" . $controller;
         // var_dump($class);die;
         $object = new $class;
-
+        // var_dump($object);die;
         // var_dump($object);die;
         return $object->$function();
     }
