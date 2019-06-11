@@ -2,13 +2,14 @@
 namespace App\Controller;
 
 use App\Model\Employer;
+use App\Model\Gallery;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class EmployController
 {
     public function index()
     {
         $emps = Employer::all();
-        // var_dump($emps);die;
         $this->loadData('employer/listemploy',['emps' => $emps]);
     }
     
@@ -26,24 +27,70 @@ class EmployController
             $employer->address = $_POST['adress'];
             $employer->regist_num = $_POST['regist_num'];
             $employer->avatar =  $target_dir.$_FILES["avatar"]["name"];
-            // var_dump($employer->avatar);die;
             $employer->description = $_POST['description'];
             $employer->namecollection = $_POST['namecollection'];
-            $this->uploadImage();
-            // var_dump($employer->avatar);die;
+            $imgURL = $_FILES["imgcollection"]["name"];
+            for($i=0;$i<count($_FILES["imgcollection"]["name"]);$i++){
+                DB::table('image')->insert([
+                    'collection_id' => $employer->regist_num,
+                    'img_url' =>  $target_dir.$imgURL[$i],
+                ]);
+                $tmp = $_FILES['imgcollection']["tmp_name"];
+                move_uploaded_file($tmp[$i], $target_dir.$imgURL[$i]);
+            }
+            $this->uploadImage('avatar');
             $employer->save();
             header('location:' . 'list');
         }
+        else{
+
+        }
     }
+
+    public function detailEmployer()
+    {
+        $id = $_GET['id'];
+        $emp = Employer::find($id);
+        $gallerys = Gallery::where('collection_id', $emp->regist_num)->get();
+        $this->loadData('employer/detail_employ', ['emp' => $emp, 'gallerys' => $gallerys]);
+    }
+
     public function editEmployer()
     {
-        $this->loadData('employer/edit_employ',[]);
+        $id = $_GET['id'];    
+        $emp = Employer::find($id);
+        $gallerys = Gallery::where('collection_id', $emp->regist_num)->get();   
+        $this->loadData('employer/edit_employ',['emp'=>$emp, 'gallerys'=>$gallerys]);
+    }
+
+    public function updateEmployer()
+    {   
+        $id = $_POST['id'];
+        $employer = Employer::find($id);
+        $target_dir = "image/";
+        $employer->name = $_POST['name'];
+        $employer->address = $_POST['adress'];
+        $employer->regist_num = $_POST['regist_num'];
+        $employer->avatar =  $target_dir.$_FILES["avatar"]["name"];
+        $employer->description = $_POST['description'];
+        $employer->namecollection = $_POST['namecollection'];
+        $imgURL = $_FILES["imgcollection"]["name"];
+        for($i=0;$i<count($_FILES["imgcollection"]["name"]);$i++){
+            DB::table('image')->insert([
+                'collection_id' => $employer->regist_num,
+                'img_url' =>  $target_dir.$imgURL[$i],
+            ]);
+            $tmp = $_FILES['imgcollection']["tmp_name"];
+            move_uploaded_file($tmp[$i], $target_dir.$imgURL[$i]);
+        }
+        $this->uploadImage('avatar');
+        $employer->update();
+        header('location:' . 'list');
     }
 
     public function deleteEmployer()
     {
         $id = $_GET['id'];
-        // var_dump($id);die;
         $employer = Employer::find($id);
         $employer->delete();
         header('location:' . 'list');   
@@ -55,13 +102,37 @@ class EmployController
         $views = "../app/views/backend/" . $view .".php";
         require_once "../app/views/layouts/adminlayout/masterlayout.php";
     }
-    public function uploadImage()
+
+    public function uploadImage($name)
     {
-        $target_dir = "image/";
-        $target_file = $target_dir . basename($_FILES['avatar']['name']);
-        // var_dump($target_file);die;
-        $tmp = $_FILES["avatar"]["tmp_name"];
-        // var_dump($tmp);die;
-        move_uploaded_file($tmp, $target_file);
+        if(isset($_FILES[$name])){
+            $error = array();
+            $imgName = $_FILES[$name]['name'];
+            $imgSize = $_FILES[$name]['size'];
+            $imgTMP = $_FILES[$name]['tmp_name'];
+            $imgType = $_FILES[$name]['type'];
+            $imgUrl = explode('.',$_FILES[$name]['name']);
+            $format = end($imgUrl);
+            $expensions = array('jpeg', 'jpg', 'png', 'pdf');
+            if(in_array($expensions, [$format]) === false){
+                $error[] = "Format Error";
+            }
+            if($imgSize > 20480000){
+                $error[] = "Too Large";
+            }
+            if(empty($error) == true){
+                $target_dir = "image/";
+                $target_file = $target_dir . basename($imgName);
+                move_uploaded_file($imgTMP, $target_file);
+            }
+        }
+       
+    }
+
+    public function alert()
+    {
+        echo "<script>";
+        echo "alert('id not found')";
+        echo "</script>";
     }
 }

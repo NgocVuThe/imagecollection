@@ -14,7 +14,7 @@
             <?php foreach ($emps as $key => $emp):?>
                 <tr>
                     <td><?= $key + 1;?> </td>
-                    <td><a href=""><?= $emp->name;?></a></td>
+                    <td><a href="/imagecollection/public/detail?id=<?=$emp->id;?>"><?= $emp->name;?></a></td>
                     <td><?= $emp->address;?> </td>
                     <td><?= $emp->regist_num;?> </td>
                     <td><?= $emp->namecollection;?> </td>

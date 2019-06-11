@@ -1,4 +1,5 @@
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>My First Bootstrap 4 Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
+  <h1>Hello World</h1>
+  <h1>Hello World</h1>
+  <p></p> 
 </div>

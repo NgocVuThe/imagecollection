@@ -10,6 +10,7 @@ return array(
     'App\\Controller\\HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'App\\Model\\BaseModel' => $baseDir . '/app/models/BaseModel.php',
     'App\\Model\\Employer' => $baseDir . '/app/models/Employer.php',
+    'App\\Model\\Gallery' => $baseDir . '/app/models/Gallery.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
     'Carbon\\CarbonInterface' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

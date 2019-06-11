@@ -110,6 +110,7 @@ class ComposerStaticInita2134e61dc00036ebf24211ac4947187
         'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/app/controllers/HomeController.php',
         'App\\Model\\BaseModel' => __DIR__ . '/../..' . '/app/models/BaseModel.php',
         'App\\Model\\Employer' => __DIR__ . '/../..' . '/app/models/Employer.php',
+        'App\\Model\\Gallery' => __DIR__ . '/../..' . '/app/models/Gallery.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

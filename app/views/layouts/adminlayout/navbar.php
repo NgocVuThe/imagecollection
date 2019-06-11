@@ -1,6 +1,6 @@
 <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
 <div class="col-sm-2">
-<a class="navbar-brand" href="#">Trang Chủ</a>
+<a class="navbar-brand" href="/imagecollection/public/list">Trang Chủ</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
